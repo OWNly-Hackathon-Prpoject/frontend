@@ -16,7 +16,7 @@ const Header = ({ bringTweet }) => {
     <>
       <Box pt="20" px="4">
         <Text fontSize={title_size} className="title i">
-          Upload Tweet
+          Deploy/Mint Tweet
         </Text>
       </Box>
       <Box className="i" my="12" align="center">
