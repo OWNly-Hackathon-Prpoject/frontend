@@ -47,12 +47,12 @@ function Homepage(props) {
               </Text>
               <br />{" "}
               <Text color={"blue.400"} as={"span"}>
-                an Own and Share Copyright NFT Platform
+                an Own and Share  NFT Copyright Platform
               </Text>{" "}
             </Heading>
             <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
               You can choose to place a price on anything you own in the digital
-              world and share the copyright.
+              world and share, sell the copyright.
             </Text>
             <Stack direction={{ base: "column", md: "row" }} spacing={4}>
               <Link href={"/screens/App"}>
@@ -85,7 +85,7 @@ function Homepage(props) {
           >
             <Text fontSize="2xl">Social-U</Text>
             <Text fontSize="sm">
-              All social media related generated NFTs from platforms like
+              All social media related NFTs generated from platforms like
               Twitter, Instagram, Tiktok, e.t.c can be minted and monetised by
               interested followers and those who have need for them.
             </Text>
@@ -104,8 +104,8 @@ function Homepage(props) {
               <Text fontSize="sm">
                 Intellectual productions such as books, personal interviews,
                 whistleblowers accounts, lectures, topsecrets, can also be
-                minted and be traded on the blockchain for value, shared, sold
-                or rented
+                minted and be traded on the blockchain for value. They can shared, sold
+                or rented.
               </Text>
             </Box>
           </Container>
