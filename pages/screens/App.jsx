@@ -17,7 +17,7 @@ const App = () => {
     // If the user is not connected to Rinkeby, tell them to switch to rinkeby
 
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 4) {
+    if (chainId !== 80001) {
       window.alert("Please switch to the Rinkeby network");
       throw new Error("Incorrect network");
     }
@@ -35,7 +35,7 @@ const App = () => {
   };
   useEffect(() => {
     web3ModalRef.current = new Web3Modal({
-      network: "rinkeby",
+      network: "mumbai",
       providerOptions: {},
       disableInjectedProvider: false,
     });

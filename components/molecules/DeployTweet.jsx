@@ -112,10 +112,10 @@ function DeployTweet({ contract }) {
     try {
       const response = await contract.deployNftParams(
         transferLimit > 0 ? true : false,
-        transferLimit,
-        tweetId,
-        mintFee,
-        mintLimit
+        parseInt(transferLimit),
+        parseInt(tweetId),
+        parseInt(mintFee),
+        parseInt(mintLimit)
       );
       console.log(response);
     } catch (error) {
