@@ -4,12 +4,11 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
-import Header from "../../components/Desktop3/Header";
-import Main from "../../components/Desktop3/Main";
-import Settings from "../../components/Desktop3/Settings";
+import Header from "../atoms/Header";
+import Main from "../atoms/Main";
+import Settings from "../atoms/Settings";
 
 import { Text, Box, Flex, Input, Select, Button } from "@chakra-ui/react";
-import { deployNFT } from "../../pages/screens/contractFunctions";
 
 function DeployTweet({ contract }) {
   const [bg, setBg] = useState(
@@ -160,13 +159,7 @@ function DeployTweet({ contract }) {
           placeholder="Enter Transfer Limit"
           type={"number"}
         />
-        <Button
-          onClick={() =>
-            deployNFT(contract, tweetId, tokenFeature, mintFee, transferLimit)
-          }
-        >
-          DEPLOY
-        </Button>
+        <Button>DEPLOY</Button>
       </Flex>
     </Box>
   );

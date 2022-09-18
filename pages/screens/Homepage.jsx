@@ -18,9 +18,10 @@ import Link from "next/link";
 
 function Homepage(props) {
   const router = useRouter();
-  const { isAuthenticated } = useMoralis();
+  const { authenticate, isAuthenticated } = useMoralis();
+
   useEffect(() => {
-    if (isAuthenticated) console.log("/screens/Home");
+    if (isAuthenticated) router.push("/screens/App");
   }, [isAuthenticated]);
   return (
     <>
@@ -66,7 +67,9 @@ function Homepage(props) {
                   Launch App
                 </Button>
               </Link>
-              <Button rounded={"full"}>Connect Wallet</Button>
+              <Button rounded={"full"} onClick={authenticate}>
+                Connect Wallet
+              </Button>
             </Stack>
           </Stack>
         </Flex>

@@ -2,6 +2,7 @@ import React from "react";
 import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../../abi/TwitterNft";
 import DeployTweet from "../../components/molecules/DeployTweet";
+import Navigation from "../../components/atoms/Navigation";
 
 const App = () => {
   // contract address is rinkeby's
@@ -15,6 +16,7 @@ const App = () => {
   // end of contract interaction functions
   return (
     <>
+      <Navigation />
       <DeployTweet />
     </>
   );
