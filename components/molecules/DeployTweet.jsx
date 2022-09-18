@@ -141,6 +141,7 @@ function DeployTweet({ contract }) {
           <option value={1}>TRANSFERABLE</option>
           <option value={2}>TRANSFERABLE_N_TIMES</option>
         </Select> */}
+     /* Move from 144 t0 163 => 135 */
         <Input
           name="tokenFeature"
           onChange={(e) => setTokenFeature(e.target.value)}
