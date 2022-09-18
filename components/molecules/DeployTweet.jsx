@@ -162,36 +162,6 @@ function DeployTweet({ contract }) {
         />
         {!hint && <Settings props={propsForSettings} />}
       </Flex>
-<<<<<<< HEAD
-=======
-      <Flex my="16" direction={"column"} p="4">
-        {/* <Select placeholder="Select token feature">
-          <option value={0}>NON_TRANSFERABLE</option>
-          <option value={1}>TRANSFERABLE</option>
-          <option value={2}>TRANSFERABLE_N_TIMES</option>
-        </Select> */}
-     /* Move from 144 t0 163 => 135 */
-        <Input
-          name="tokenFeature"
-          onChange={(e) => setTokenFeature(e.target.value)}
-          placeholder="Enter Token Feature"
-          type={"number"}
-        />
-        <Input
-          name="mintFee"
-          onChange={(e) => setMintFee(e.target.value)}
-          placeholder="Enter Mint Fee"
-          type={"number"}
-        />
-        <Input
-          name="transferLimit"
-          onChange={(e) => setTransferLimit(e.target.value)}
-          placeholder="Enter Transfer Limit"
-          type={"number"}
-        />
-        <Button>DEPLOY</Button>
-      </Flex>
->>>>>>> dda1e172b7bc70422a1e7f764ec894e41fc07f72
     </Box>
   );
 }
