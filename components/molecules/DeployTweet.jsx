@@ -9,6 +9,7 @@ import Main from "../atoms/Main";
 import Settings from "../atoms/Settings";
 
 import { Text, Box, Flex, Input, Select, Button } from "@chakra-ui/react";
+import { BigNumber } from "ethers";
 
 function DeployTweet({ contract }) {
   const [bg, setBg] = useState(
@@ -109,11 +110,12 @@ function DeployTweet({ contract }) {
     }
   };
   const deployTweet = async () => {
+    console.log(transferLimit, tweetId, mintFee, mintLimit);
     try {
       const response = await contract.deployNftParams(
         transferLimit > 0 ? true : false,
         parseInt(transferLimit),
-        parseInt(tweetId),
+        BigNumber.from(tweetId),
         parseInt(mintFee),
         parseInt(mintLimit)
       );
