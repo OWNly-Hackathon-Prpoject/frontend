@@ -6,6 +6,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { contractABI } from "../../abi/TwitterNft";
 
 const Header = ({ bringTweet }) => {
   const title_size = { base: "33px", md: "50px", lg: "55px" };

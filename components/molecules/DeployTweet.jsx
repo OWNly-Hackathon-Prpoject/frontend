@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import axios from "axios";
 import domtoimage from "dom-to-image";
@@ -18,7 +18,7 @@ function DeployTweet({ contract }) {
   const tweetRef = useRef(null);
 
   const [tweetData, setTweetData] = useState(null);
-
+  const [tweetIsDeployed, setTweetIsDeployed] = useState(false);
   const [showTime, setShowTime] = useState(true);
   const [showMetrics, setShowMetrics] = useState(true);
   const [showSource, setShowSource] = useState(true);
@@ -30,12 +30,20 @@ function DeployTweet({ contract }) {
   const [error, setError] = useState(false);
 
   // form props
-  const [tweetId, setTweetId] = useState(null);
-  const [tokenFeature, setTokenFeature] = useState(0);
+  const [tweetId, setTweetId] = useState(0);
   const [mintFee, setMintFee] = useState(0);
-  const [transferLimit, setTransferLimit] = useState(1);
+  const [transferLimit, setTransferLimit] = useState(0);
+  const [mintLimit, setMintLimit] = useState(0);
   const [tweetImageURL, setTweetImageURL] = useState("");
 
+  const checkIfDeployed = async (id) => {
+    try {
+      const response = await contract.getIfTweetIsDeployed(id);
+      setTweetIsDeployed(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const bringTweet = async (e) => {
     try {
       e.preventDefault();
@@ -52,6 +60,7 @@ function DeployTweet({ contract }) {
       } else {
         setLoading(false);
         setTweetData(data.data);
+        checkIfDeployed(id);
         setError(false);
       }
     } catch (e) {
@@ -99,7 +108,20 @@ function DeployTweet({ contract }) {
       }
     }
   };
-
+  const deployTweet = async () => {
+    try {
+      const response = await contract.deployNftParams(
+        transferLimit > 0 ? true : false,
+        transferLimit,
+        tweetId,
+        mintFee,
+        mintLimit
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const propsForSettings = {
     showTime,
     setShowTime,
@@ -112,6 +134,11 @@ function DeployTweet({ contract }) {
     convert,
     bg,
     setBg,
+    tweetIsDeployed,
+    deployTweet,
+    setMintLimit,
+    setMintFee,
+    setTransferLimit,
   };
 
   const flex = { base: "column", lg: "row" };
@@ -134,32 +161,6 @@ function DeployTweet({ contract }) {
           showSource={showSource}
         />
         {!hint && <Settings props={propsForSettings} />}
-      </Flex>
-      <Flex my="16" direction={"column"} p="4">
-        {/* <Select placeholder="Select token feature">
-          <option value={0}>NON_TRANSFERABLE</option>
-          <option value={1}>TRANSFERABLE</option>
-          <option value={2}>TRANSFERABLE_N_TIMES</option>
-        </Select> */}
-        <Input
-          name="tokenFeature"
-          onChange={(e) => setTokenFeature(e.target.value)}
-          placeholder="Enter Token Feature"
-          type={"number"}
-        />
-        <Input
-          name="mintFee"
-          onChange={(e) => setMintFee(e.target.value)}
-          placeholder="Enter Mint Fee"
-          type={"number"}
-        />
-        <Input
-          name="transferLimit"
-          onChange={(e) => setTransferLimit(e.target.value)}
-          placeholder="Enter Transfer Limit"
-          type={"number"}
-        />
-        <Button>DEPLOY</Button>
       </Flex>
     </Box>
   );

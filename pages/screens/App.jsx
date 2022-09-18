@@ -1,23 +1,50 @@
-import React from "react";
-import { ethers } from "ethers";
+import React, { useRef, useEffect, useState } from "react";
+import { ethers, providers } from "ethers";
+import Web3Modal from "web3modal";
 import { contractABI, contractAddress } from "../../abi/TwitterNft";
 import DeployTweet from "../../components/molecules/DeployTweet";
 import Navigation from "../../components/atoms/Navigation";
 
 const App = () => {
+  const web3ModalRef = useRef();
+  const [contract, setContract] = useState(null);
   // contract address is rinkeby's
-  const provider = new ethers.providers.getDefaultProvider();
-  console.log(provider);
-  // const signer = provider.getSigner();
+  const getProviderOrSigner = async (needSigner = false) => {
+    // We need to gain access to the provider/signer from metamask
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
 
-  const contract = new ethers.Contract(contractAddress, contractABI, provider);
-  // contract interaction functions
+    // If the user is not connected to Rinkeby, tell them to switch to rinkeby
 
-  // end of contract interaction functions
+    const { chainId } = await web3Provider.getNetwork();
+    if (chainId !== 4) {
+      window.alert("Please switch to the Rinkeby network");
+      throw new Error("Incorrect network");
+    }
+
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+
+    return web3Provider;
+  };
+  const getContract = async (withSigner = false) => {
+    const provider = await getProviderOrSigner(withSigner);
+    setContract(new ethers.Contract(contractAddress, contractABI, provider));
+  };
+  useEffect(() => {
+    web3ModalRef.current = new Web3Modal({
+      network: "rinkeby",
+      providerOptions: {},
+      disableInjectedProvider: false,
+    });
+    getContract(true);
+  }, []);
   return (
     <>
-      <Navigation />
-      <DeployTweet />
+      <Navigation contract={contract} />
+      <DeployTweet contract={contract} />
     </>
   );
 };

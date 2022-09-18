@@ -13,6 +13,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Input,
 } from "@chakra-ui/react";
 
 import { DownloadIcon } from "@chakra-ui/icons";
@@ -189,6 +190,33 @@ const Settings = ({ props }) => {
           <MenuItem onClick={() => props.convert("svg")}>SVG</MenuItem>
         </MenuList>
       </Menu>
+      {!props.tweetIsDeployed ? (
+        <Flex my="16" direction={"column"} p="4">
+          <Input
+            name="mintFee"
+            onChange={(e) => props.setMintFee(e.target.value)}
+            placeholder="Enter Mint Fee"
+            type={"number"}
+          />
+          <Input
+            name="transferLimit"
+            onChange={(e) => props.setTransferLimit(e.target.value)}
+            placeholder="Enter Transfer Limit"
+            type={"number"}
+          />
+          <Input
+            name="tokenFeature"
+            onChange={(e) => props.setMintLimit(e.target.value)}
+            placeholder="Enter Mint Limit"
+            type={"number"}
+          />
+          <Button onClick={props.deployTweet}>DEPLOY</Button>
+        </Flex>
+      ) : (
+        <Flex>
+          <Button>MINT</Button>
+        </Flex>
+      )}
     </Box>
   );
 };

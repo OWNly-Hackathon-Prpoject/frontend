@@ -12,8 +12,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useMoralis } from "react-moralis";
+import FundVaultModal from "./FundVaultModal";
 
-export default function Navigation() {
+export default function Navigation({ contract }) {
   const { isOpen, onToggle } = useDisclosure();
   const { authenticate } = useMoralis();
   return (
@@ -77,6 +78,7 @@ export default function Navigation() {
           >
             Connect Wallet
           </Button>
+          <FundVaultModal contract={contract} />
         </Stack>
       </Flex>
 
